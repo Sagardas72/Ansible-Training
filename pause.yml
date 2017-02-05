@@ -1,0 +1,14 @@
+--- # PAUSE MODULE EXAMPLE
+- hosts: apacheweb
+  user: test
+  sudo: yes
+  connection: ssh
+  gather_facts: no
+  tasks:
+    - name: Install HTTPD
+      yum: pkg=httpd state=installed
+    - name: Pausing
+      pause:
+        prompt: 'Make sure the installation is complete'
+    - name: Verify lynx installation
+      yum: pkg=lynx state=present

@@ -1,0 +1,15 @@
+--- # ACL MODULE EXAMPLE
+- hosts: apacheweb
+  user: test
+  sudo: yes
+  connection: ssh
+  gather_facts: no
+  tasks:
+    - name: Set and get the acl information on the /etc/test.acl.txt file
+      acl: name=/etc/test.acl.txt entity=test etype=user permissions='rw' state=present
+      register: aclinfo
+    - debug: msg={{ aclinfo }}
+    - name: Delete the acl information on the /etc/test.acl.txt file
+      acl: name=/etc/test.acl.txt entity=test etype=user state=absent
+      register: aclinfo
+    - debug: msg={{ aclinfo }}

@@ -1,5 +1,5 @@
---- # TESTING THE J2 TEMPLATE MODULE
-- hosts: apacheweb:aptserver
+--- # TEMPLATE MODULE EXAMPLE
+- hosts: apacheweb:debian
   connection: ssh
   sudo: yes
   user: test
@@ -10,4 +10,4 @@
     connectionType: SFTP
   tasks:
     - name: Install the configuration file customised for the system
-      template: src=test.conf.j2 dest=/home/test/test.conf owner=test group=test mode=750
+      template: src=test.conf.j2 dest=/home/test/test.conf owner=test group=test mode=0750

@@ -1,0 +1,11 @@
+--- # KERNEL_BLACKLIST MODULE EXAMPLE
+- hosts: apacheweb
+  user: test
+  sudo: yes
+  connection: ssh
+  gather_facts: yes
+  tasks:
+    - name: Blacklist the DUMMY kernel module
+      kernel_blacklist: name=dummy state=present
+    - name: Remove the DUMMY kernel module from blacklist
+      kernel_blacklist: name=dummy state=absent

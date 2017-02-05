@@ -1,0 +1,11 @@
+--- # MYSQL_USER MODULE EXAMPLE
+- hosts: appserver
+  user: test
+  sudo: yes
+  connection: ssh
+  gather_facts: yes
+  tasks:
+    - name: Install the MySQL Python Support Library
+      yum: name=MYSQL-python state=latest
+    - name: Create a new user called BOB and give him all acces
+      mysql_user: name=bob password=123password priv=*.*:ALL state=present login_user=root login_password=password123

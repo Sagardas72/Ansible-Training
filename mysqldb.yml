@@ -1,0 +1,16 @@
+--- # MYSQL_DB MODULE EXAMPLE
+- hosts: appserver
+  user: test
+  sudo: yes
+  connection: ssh
+  gather_facts: yes
+  tasks:
+    - name: Install the python mysql support libraries
+      yum: name=MYSQL-python state=latest
+    - name: Create a new test db called MyNewDB
+      mysql_db: name=MyNewDB state=present login_user=root login_password=password123
+    - name: Drop the test db called MyNewDB
+      mysql_db: name=MyNewDB state=absent login_user=root login_password=password123
+    - name: Backup a db called MyDBTest
+      mysql_db: name=MyDBTest state=dump target=/var/lib/mydbtestbkup.sql login_user=root login_password=password123
+

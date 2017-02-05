@@ -1,0 +1,14 @@
+--- # SETFACT MODULE EXAMPLE
+- hosts: appserver
+  user: test
+  sudo: yes
+  connection: ssh
+  gather_facts: no
+  vars:
+    playbook_version: 0.1
+  tasks:
+    - name: Local Variable Display
+      set_fact:
+        singlefact: SOMETHING
+    - debug: msg={{ playbook_version }}
+    - debug: msg={{ singlefact }}

@@ -1,0 +1,9 @@
+--- # PACKAGE MODULE EXAMPLE
+- hosts: apacheweb:aptserver
+  user: test
+  sudo: yes
+  connection: ssh
+  gather_facts: yes
+  tasks:
+    - name: Install Telnet Package
+      package: name=telnet state=latest

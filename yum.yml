@@ -1,0 +1,11 @@
+--- # YUM MODULE EXAMPLE
+- hosts: apacheweb
+  user: test
+  sudo: yes
+  connection: ssh
+  gather_facts: no
+  tasks:
+    - name: Installing Apache Web Server
+      yum: name=httpd state=installed
+    - name: Equivalent of YUM UPGRAGE
+      yum: name=* state=latest
