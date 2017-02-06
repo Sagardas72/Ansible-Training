@@ -1,0 +1,7 @@
+- name: Install (Debian/Ubuntu) Apache Web Server
+  apt: name={{ debian_apache }} state=latest
+  when: ansible_os_family == 'Debian'
+  notify: Restart Apache2
+  ignore_errors: yes
+- name: Work with template
+  template: src=../templates/test.conf.js dest=/home/test/test.conf owner=test group=test mode=0750

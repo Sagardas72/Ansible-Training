@@ -1,0 +1,21 @@
+- name: Install the apache web server
+  yum: name=httpd state=latest
+  #notify: Start HTTPD
+- name: Start the apache web server
+  service: name=httpd state=started
+- name: Add a list of software
+  yum: name={{ item }} state=latest
+  with_items:
+    - telnet
+    - lynx
+  tags: install_list
+- name: Verify that the web service is running
+  command: systemctl status httpd
+  register: result
+  ignore_errors: yes
+- name: Log all the packages installed on the system
+  command: yum list installed | grep telnet
+  register: installed_result
+  tags: install_result
+- debug: var=result
+- debug: var=installed_result
