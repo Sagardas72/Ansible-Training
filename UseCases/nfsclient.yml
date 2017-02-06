@@ -1,0 +1,13 @@
+--- # MASTER PLAYBOOK FOR ROLE BASED NFS CLIENT DEPLOYMENTS
+- hosts: local
+  user: test
+  sudo: yes
+  connection: ssh
+  pre_tasks:
+    - name: How long the ROLE took to run
+      raw: date > /home/test/startofrole.log
+  roles:
+    - nfs.client
+  post_tasks:
+    - name: When did the ROLE end
+      raw: date > /home/test/endofrole.log

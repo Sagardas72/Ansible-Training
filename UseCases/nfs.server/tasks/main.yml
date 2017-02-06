@@ -1,0 +1,7 @@
+- name: Install the NFS Server and Utilities
+  yum: name={{ nfsutils_pkg }} state=latest
+- name: Copy the export file to remote server
+  copy: src=exports.template dest=/etc/exports owner=root group=root mode=0644
+  notify:
+    - StartServerServices
+

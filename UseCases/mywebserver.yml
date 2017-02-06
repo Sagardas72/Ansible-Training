@@ -1,0 +1,32 @@
+---  # Build an Apache Web Server
+- hosts: apacheweb
+  user: test
+  sudo: yes
+  connection: ssh
+  gather_facts: yes
+  vars:
+    apache_pkg: httpd
+    distribution: redhat
+    apache_version: 2.4
+    apache_dir: /var/www/sample
+    apache_fqdn: sdas2.mylabserver.com
+  tasks:
+    - name: Install the Web Server Package
+      yum: name=httpd state=latest
+    - name: Create the webserver directory
+      file: path=/var/www/sample state=directory mode=0644
+    - name: Copy the Apache Configuration file to remote host
+      copy: src=files/httpd.conf.template dest=/etc/httpd/conf/httpd.conf owner=root group=root mode=0644
+    - name: Create the vhost.d directory on the remote host
+      file: path=/etc/httpd/vhost.d dtate=directory mode=0644
+    - name: Copy and untar the source for the site
+      unarchive: src=files/sitecode.tar.gz dest=/var/www/sample
+    - name: Copy the default vhost configuration file
+      copy: src=files/default.conf.template dest=/etc/httpd/vhost.d/default.conf owner=root group=root mode=0644
+    - name: Start the Web server
+      service: name=httpd state=started
+    - name: Test the web server
+      shell: curl http://sdas4.mylabserver.com
+      register: result
+    - name: Display Result
+      debug: var=result
