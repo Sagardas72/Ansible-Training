@@ -1,0 +1,10 @@
+--- # MASTER PLAYBOOK DEMONSTRATING THE LOCAL_ACTION MODULE
+- hosts: apacheweb
+  user: test
+  sudo: yes
+  connection: ssh
+  pre_tasks:
+    - name: Ping the Application Server
+      local_action: ping -c 4 sdas3
+  roles:
+    - webservers

@@ -1,0 +1,11 @@
+--- # MASTER PLAYBOOK DEMONSTRATING THE DELEGATE_TO MODULE
+- hosts: apacheweb
+  user: test
+  sudo: yes
+  connection: ssh
+  pre_tasks:
+    - name: Ping the Application Server
+      raw: ping -c 4 sdas3
+      delegate_to: 127.0.0.1
+  roles:
+    - webservers
