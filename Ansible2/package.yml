@@ -1,0 +1,10 @@
+--- # PACKAGE MODULE EXAMPLE
+- hosts: all
+  remote_user: test
+  become: yes
+  become_method: sudo
+  connection: ssh
+  gather_facts: yes
+  tasks:
+    - name: Install Telnet client on all distribution types
+      package: name=telnet state=latest

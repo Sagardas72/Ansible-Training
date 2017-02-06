@@ -1,0 +1,12 @@
+--- # FIND MODULE EXAMPLE
+- hosts: appserver
+  remote_user: test
+  become: yes
+  become_method: sudo
+  connection: ssh
+  gather_facts: yes
+  tasks:
+    - name: Simple find on fstab file
+      find: paths='/etc' patterns='fstab'
+      register: result
+    - debug: var=result

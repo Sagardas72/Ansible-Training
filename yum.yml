@@ -1,7 +1,8 @@
 --- # YUM MODULE EXAMPLE
 - hosts: apacheweb
-  user: test
-  sudo: yes
+  remote_user: test
+  become: yes
+  become_method: sudo
   connection: ssh
   gather_facts: no
   tasks:
